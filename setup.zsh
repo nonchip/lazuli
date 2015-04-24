@@ -83,7 +83,14 @@ export LAZULI_ROOT="$LAZULI_ROOT"
 
 export PATH="\$LAZULI_ROOT/bin:\$PATH"
 export LD_LIBRARY_PATH="\$LAZULI_ROOT/lib:\$LD_LIBRARY_PATH"
-exec "\$@"
+
+fn=\$(basename \$0)
+if [ "\$fn" = ".run" ]
+  then exec "\$@"
+else
+  exec \$fn "\$@"
+fi
+
 END
     chmod a+rx $LAZULI_PATH/.run
     ;&
