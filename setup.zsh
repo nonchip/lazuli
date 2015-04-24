@@ -93,6 +93,9 @@ fi
 
 END
     chmod a+rx $LAZULI_PATH/.run
+    ln -sf .run $LAZULI_PATH/lapis
+    ln -sf .run $LAZULI_PATH/moonc
+    ln -sf .run $LAZULI_PATH/luarocks
     ;&
 esac
 
