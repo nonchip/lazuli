@@ -8,10 +8,7 @@ this installs the dependencies (and some wrappers) locally, thanks to magic I'm 
 
 ### setting up your app
 
-    ./lapis new
-    ./lapis generate lazuli <appname>
-
-where `<appname>` is used internally for stuff like the default title, database prefix, etc.
+edit `config.moon`
 
 ### running your app
 
@@ -20,7 +17,7 @@ where `<appname>` is used internally for stuff like the default title, database 
     ./lapis migrate <environment>
     ./lapis server <environment>
 
-where `<environment>` may be `development` or `production` or any custom defined
+where `<environment>` may be `development` or `production` or any custom defined in `config.moon`
 
 ### rebuilding/upgrading your app
 
