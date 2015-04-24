@@ -9,6 +9,9 @@ this installs the dependencies (and some wrappers) locally, thanks to magic I'm 
 ### setting up your app
 
     ./lapis new
+    ./lapis generate lazuli <appname>
+
+where `<appname>` is used internally for stuff like the default title, database prefix, etc.
 
 ### running your app
 
