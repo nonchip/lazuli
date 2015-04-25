@@ -12,6 +12,11 @@ edit `config.moon`
 
 ### running your app
 
+    ./mk <environment>
+    ./lapis server <environment>
+
+OR
+
     ./moonc .
     ./lapis build <environment>
     ./lapis migrate <environment>
@@ -22,6 +27,10 @@ where `<environment>` may be `development`, `test` or `production`.
 ### rebuilding/upgrading your app
 
 after you made some changes, you might want to make lapis reload your stuff on the fly:
+
+    ./mk <environment>
+
+OR
 
     ./moonc .
     ./lapis build <environment>
