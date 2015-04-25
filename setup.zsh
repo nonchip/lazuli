@@ -92,7 +92,6 @@ if [ "\$fn" = ".run" ]
 else
   exec \$fn "\$@"
 fi
-
 END
     chmod a+rx $LAZULI_PATH/.run
     ln -sf .run $LAZULI_PATH/lapis
