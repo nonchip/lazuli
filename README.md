@@ -29,5 +29,11 @@ after you made some changes, you might want to make lapis reload your stuff on t
 
 ### stopping the server
 
+#### in `development` or `test` mode
+
+just press ctrl+c
+
+#### in `production` mode
+
     ./lapis term
 
