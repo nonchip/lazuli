@@ -37,3 +37,14 @@ just press ctrl+c
 
     ./lapis term
 
+## webserver config
+###apache
+
+    <VirtualHost *:80>
+            ServerName <hostname>
+            ProxyPreserveHost On
+            ProxyPass / http://127.0.0.1:<port>/
+            ProxyPassReverse / http://127.0.0.1:<port>/
+    </VirtualHost>
+
+where `<hostname>` is the FQDN to handle and `<port>` is the port specified in `config.moon`
