@@ -44,3 +44,17 @@ just press ctrl+c
     </VirtualHost>
 
 where `<hostname>` is the FQDN to handle and `<port>` is the port specified in `config.moon`
+
+
+## app `environment`s
+### development
+
+use this to test while developing, the app will know and handle debug stuff
+
+### test
+
+use this to test for production, the app will think it's in production, but the server uses test/development config
+
+### production
+
+use this when running for production
