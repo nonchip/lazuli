@@ -38,7 +38,7 @@ just press ctrl+c
     ./lapis term
 
 ## webserver config
-###apache
+###apache2
 
     <VirtualHost *:80>
             ServerName <hostname>
