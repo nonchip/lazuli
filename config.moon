@@ -13,6 +13,8 @@ config {"test","production"}, ->
 
 config {"development","test","production"},->
   set "appname", appname
+  set "env_lua_path", (os.getenv "LUA_PATH")\gsub "%;", "\\;"
+  set "env_moon_path", (os.getenv "MOON_PATH")\gsub "%;", "\\;"
   postgres ->
     backend "pgmoon"
 

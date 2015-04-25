@@ -1,0 +1,3 @@
+{
+  Application: require "lazuli.application"
+}

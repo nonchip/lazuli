@@ -1,5 +1,6 @@
 lapis = require "lapis"
+lazuli = require "lazuli"
 
-class extends lapis.Application
+class extends lazuli.Application
   "/": =>
-    "Welcome to Lapis #{require "lapis.version"}!"
+    "Welcome to Lazuli!"
