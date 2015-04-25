@@ -17,7 +17,7 @@ edit `config.moon`
     ./lapis migrate <environment>
     ./lapis server <environment>
 
-where `<environment>` may be `development` or `production` or any custom defined in `config.moon`
+where `<environment>` may be `development`, `test` or `production` or any custom defined in `config.moon`
 
 ### rebuilding/upgrading your app
 
