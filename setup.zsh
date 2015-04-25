@@ -82,8 +82,8 @@ export LAZULI_ROOT="$LAZULI_ROOT"
 [ -e "\$LAZULI_ROOT" ] || ln -s "\$LAZULI_PATH/.root" \$LAZULI_ROOT
 
 export PATH="\$LAZULI_ROOT/bin:\$PATH"
-export LUA_PATH="\$LAZULI_PATH/custom_?.lua;\$LUA_PATH"
-export MOON_PATH="\$LAZULI_PATH/custom_?.moon;\$MOON_PATH"
+export LUA_PATH="\$LAZULI_PATH/custom_?.lua;\$LAZULI_PATH/?.lua;\$LUA_PATH"
+export MOON_PATH="\$LAZULI_PATH/custom_?.moon;\$LAZULI_PATH/?.moon;\$MOON_PATH"
 export LD_LIBRARY_PATH="\$LAZULI_ROOT/lib:\$LD_LIBRARY_PATH"
 
 fn=\$(basename \$0)
