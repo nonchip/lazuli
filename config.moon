@@ -4,7 +4,7 @@ import slugify from require "lapis.util"
 appname="<EDIT THIS>"
 dbname=slugify appname
 sessionname=slugify appname
-secretkey=slugify appname
+secretkey="<EDIT THIS>"..slugify appname
 
 config "development", ->
   set "envmode","development"
