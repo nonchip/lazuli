@@ -22,6 +22,8 @@ config {"development","test"}, ->
   postgres ->
     database dbname.."_dev"
     password "<EDIT THIS>"
+    host "127.0.0.1:5432"
+    user "postgres"
   port 8080
   page_cache_size "1m"
   code_cache "off"
@@ -34,6 +36,8 @@ config "production", ->
   postgres ->
     database dbname
     password "<EDIT THIS>"
+    host "127.0.0.1:5432"
+    user "postgres"
   port 8081 -- EDIT THIS
   page_cache_size "30m"
   code_cache "on"

@@ -1,4 +1,4 @@
-lapis = require "lapis"
+--lapis = require "lapis"
 lazuli = require "lazuli"
 
 class extends lazuli.Application

@@ -70,6 +70,14 @@ case $continue_stage in
     echo "lapis" > "$LAZULI_PATH/.continue_stage"
     $LAZULI_ROOT/bin/luarocks install lapis
     ;&
+  lapisconsole)
+    echo "lapisconsole" > "$LAZULI_PATH/.continue_stage"
+    $LAZULI_ROOT/bin/luarocks install --server=http://rocks.moonscript.org lapis-console
+    ;&
+  sitegen)
+    echo "sitegen" > "$LAZULI_PATH/.continue_stage"
+    $LAZULI_ROOT/bin/luarocks install https://raw.github.com/leafo/sitegen/master/sitegen-dev-1.rockspec
+    ;&
   wrappers)
     echo "wrappers" > "$LAZULI_PATH/.continue_stage"
     # wrappers
@@ -97,6 +105,7 @@ END
     ln -sf .run $LAZULI_PATH/lapis
     ln -sf .run $LAZULI_PATH/moonc
     ln -sf .run $LAZULI_PATH/luarocks
+    ln -sf .run $LAZULI_PATH/sitegen
     ;&
 esac
 

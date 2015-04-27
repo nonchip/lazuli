@@ -14,6 +14,9 @@
       "set"
       "backend"
       "measure_performance"
+      "user"
+      "host"
     }
+    ["."]:{ "ngx" }
   }
 }
