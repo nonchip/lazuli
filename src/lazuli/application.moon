@@ -9,6 +9,9 @@ class extends lapis.Application
     if config.measure_performance
       after_dispatch ->
         print to_json ngx.ctx.performance
-  "/_lazuli/console": (require "lapis.console").make!
+  "/_lazuli/console": if config.enable_console 
+    (require "lapis.console").make!
+  else
+    => "console disabled in config"
   new: (...)=>
     super ...

@@ -25,6 +25,7 @@ config {"development","test"}, ->
     host "127.0.0.1:5432"
     user "postgres"
   port 8080
+  enable_console true
   page_cache_size "1m"
   code_cache "off"
   run_daemon "off"
@@ -39,6 +40,7 @@ config "production", ->
     host "127.0.0.1:5432"
     user "postgres"
   port 8081 -- EDIT THIS
+  enable_console false
   page_cache_size "30m"
   code_cache "on"
   num_workers 4
