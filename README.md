@@ -49,7 +49,8 @@ where `<hostname>` is the FQDN to handle and `<port>` is the port specified in `
 ## app `environment`s
 ### `development`
 
-use this to test while developing, the app will know and handle debug stuff
+use this to test while developing, the app will know and handle debug stuff.
+if `enable_console` is enabled in `config.moon` (which it is by default), you're able to access the lapis console (https://github.com/leafo/lapis-console) via `/_lazuli/console`
 
 ### `test`
 
