@@ -5,6 +5,7 @@
       "folder_exclude_patterns": [
         ".root",
         "*_temp",
+        "logs",
       ],
       "file_exclude_patterns": [
         ".run",
@@ -15,8 +16,6 @@
         "moonc",
         "sitegen",
         "nginx.conf.compiled",
-        "logs/*.log",
-        "logs/*.pid",
       ],
 		},
 	],
