@@ -16,6 +16,7 @@
       "measure_performance"
       "user"
       "host"
+      "enable_console"
     }
     ["."]:{ "ngx" }
   }
