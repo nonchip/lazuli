@@ -1,0 +1,13 @@
+/.root
+/.run
+/lapis
+/luarocks
+/moonc
+/sitegen
+/logs/*.log
+/logs/*.pid
+/nginx.conf.compiled
+/*_temp
+*.lua
+/custom_config.moon
+/.sublime-project.sublime-workspace

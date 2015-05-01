@@ -1,0 +1,27 @@
+{
+	"folders": [
+		{
+			"path": ".",
+      "folder_exclude_patterns": [
+        ".root",
+        "*_temp",
+      ],
+      "file_exclude_patterns": [
+        ".run",
+        "*.lua",
+        "lapis",
+        "luarocks",
+        "mk",
+        "moonc",
+        "sitegen",
+        "nginx.conf.compiled",
+        "logs/*.log",
+        "logs/*.pid",
+      ],
+		},
+	],
+  "settings": {
+      "tab_size": 2,
+      "translate_tabs_to_spaces": true,
+  },
+}
