@@ -10,6 +10,7 @@ config {"test","production"}, ->
 config {"development","test","production"},->
   set "appname", "please set the appname in config.moon"
   set "env_lua_path", (os.getenv "LUA_PATH")\gsub "%;", "\\;"
+  set "env_lua_cpath", (os.getenv "LUA_CPATH")\gsub "%;", "\\;"
   set "env_moon_path", (os.getenv "MOON_PATH")\gsub "%;", "\\;"
   postgres ->
     backend "pgmoon"
