@@ -8,7 +8,7 @@ this installs the dependencies (and some wrappers) locally, thanks to magic I'm 
 
 ### setting up your app
 
-edit `config.moon`
+edit `config.moon` or create `custom_config.moon` (which has priority over `config.moon` if it exists)
 
 ### running your app
 
