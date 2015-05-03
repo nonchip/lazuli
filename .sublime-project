@@ -12,7 +12,6 @@
         "*.lua",
         "lapis",
         "luarocks",
-        "mk",
         "moonc",
         "sitegen",
         "nginx.conf.compiled",
