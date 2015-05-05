@@ -7,6 +7,6 @@ class registerDo extends Widget
       ul ->
         for e in *@errors
           li e
-      a href: @url_for("users_register"), "Back"
+      a href: @url_for("lazuli_modules_usermanagement_register"), "Back"
     else
       h1 "Registration successful"

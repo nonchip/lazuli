@@ -16,10 +16,10 @@ validate_functions.user_exists = (username) ->
 
 class UsersApplication extends lazuli.Application
   @path: "/users"
-  @name: "users_"
+  @name: "lazuli_modules_usermanagement_"
   @before_filter =>
-    if @session.user and not @current_user
-      @current_user = Users\find @session.user
+    if @session.lazuli_modules_usermanagement_currentuser and not @lazuli_modules_usermanagement_currentuser
+      @lazuli_modules_usermanagement_currentuser = Users\find @session.lazuli_modules_usermanagement_currentuser
   [register: "/register"]: cached exptime: 60,[1]:=>
     render: require "lazuli.modules.user_management.views.register"
   [register_do: "/register/do"]: capture_errors{
@@ -39,8 +39,8 @@ class UsersApplication extends lazuli.Application
   [login: "/login"]: cached exptime: 60,[1]:=>
     render: require "lazuli.modules.user_management.views.login"
   [logout: "/logout"]: =>
-    @session.user=nil
-    @current_user=nil
+    @session.lazuli_modules_usermanagement_currentuser=nil
+    @lazuli_modules_usermanagement_currentuser=nil
     render: require "lazuli.modules.user_management.views.logout"
   [login_do: "/login/do"]: capture_errors{
     on_error: => render: require "lazuli.modules.user_management.views.login_do", status: 403
@@ -51,7 +51,7 @@ class UsersApplication extends lazuli.Application
       }
       user = Users\find username: @params.username
       assert_error user.pwHMACs1==encode_base64(hmac_sha1(@params.password,user.username..@params.password)), "wrong password"
-      @session.user=user.id
-      @current_user=user
+      @session.lazuli_modules_usermanagement_currentuser=user.id
+      @lazuli_modules_usermanagement_currentuser=user
       render: require "lazuli.modules.user_management.views.login_do"
   }

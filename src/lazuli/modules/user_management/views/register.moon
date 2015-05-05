@@ -3,7 +3,7 @@ import Widget from require "lapis.html"
 class register extends Widget
   content: =>
     h1 "Register account"
-    form action: @url_for("users_register_do"), method: "post", class: "pure-form pure-form-aligned", ->
+    form action: @url_for("lazuli_modules_usermanagement_register_do"), method: "post", class: "pure-form pure-form-aligned", ->
       fieldset ->
         div class: "pure-control-group", ->
           label for: "username", "Username:"
