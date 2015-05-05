@@ -23,6 +23,7 @@ config {"development","test"}, ->
     user "postgres"
   port 8080
   enable_console true
+  enable_web_migration true
   page_cache_size "1m"
   code_cache "off"
   run_daemon "off"
@@ -38,6 +39,7 @@ config "production", ->
     user "postgres"
   port 8081
   enable_console false
+  enable_web_migration false
   page_cache_size "30m"
   code_cache "on"
   num_workers 4

@@ -17,6 +17,7 @@
       "user"
       "host"
       "enable_console"
+      "enable_web_migration"
     }
     ["."]:{ "ngx" }
   }
