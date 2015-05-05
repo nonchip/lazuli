@@ -59,3 +59,8 @@ use this to test for production, the app will think it's in production, but the 
 ### `production`
 
 use this when running for production
+
+## using lazuli as a git submodule
+
+the lua/moon paths are set to prefer "./" over the lazuli project root, so just copy the `*.moon` files you want to change from lazuli's root into your project root.
+but make sure you run `setup.zsh` from inside the lazuli root each time you update the project, and watch for changes made in the lazuli project (e.g. new config vars, etc)
