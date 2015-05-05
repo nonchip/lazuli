@@ -65,4 +65,4 @@ use this when running for production
 the lua/moon paths are set to prefer "./" over the lazuli project root, so just copy the `*.moon` files you want to change from lazuli's root into your project root.
 but make sure you run `setup.zsh` from inside the lazuli root each time you update the project, and watch for changes made in the lazuli project (e.g. new config vars, etc)
 
-also make sure you copy the nginx.conf file to your project root, and PLEASE don't call lazuli's subfolder just `./lazuli/`, because this WILL mess up the load order (because of `src/lazuli/init.moon` not being found), just call it `_lazuli` or `lib/lazuli` or something like that
+also make sure you copy the `nginx.conf` and `mime.types` files to your project root, and PLEASE don't call lazuli's subfolder just `./lazuli/`, because this WILL mess up the load order (because of `src/lazuli/init.moon` not being found), just call it `_lazuli` or `lib/lazuli` or something like that
