@@ -1,0 +1,15 @@
+import Widget from require "lapis.html"
+
+class login extends Widget
+  content: =>
+    h1 "Login"
+    form action: @url_for("users_login_do"), method: "post", class: "pure-form pure-form-aligned", ->
+      fieldset ->
+        div class: "pure-control-group", ->
+          label for: "username", "Username:"
+          input id: "username",name: "username"
+        div class: "pure-control-group", ->
+          label for: "password", "Password:"
+          input id: "password", type: "password", name: "password"
+        div class: "pure-controls", ->
+          input type: "submit", class: "pure-button pure-button-primary"
