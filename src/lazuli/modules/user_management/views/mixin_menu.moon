@@ -1,5 +1,5 @@
 class FaviconMixin
-  userManagementMixinMenu: ()->
+  userManagementMixinMenu: ()=>
     ul class: "lazuli module user_management mixin_menu "..(@lazuli_modules_usermanagement_currentuser and "logged_in" or "logged_out"), ->
       if @lazuli_modules_usermanagement_currentuser
         li class: "logout", ->
