@@ -4,6 +4,7 @@ class register extends Widget
   content: =>
     h1 "Register account"
     form action: @url_for("lazuli_modules_usermanagement_register_do"), method: "post", class: "pure-form pure-form-aligned", ->
+      input type: "hidden", name: "csrf_token", value: @csrf_token
       fieldset ->
         div class: "pure-control-group", ->
           label for: "username", "Username:"

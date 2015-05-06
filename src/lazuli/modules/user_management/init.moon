@@ -4,6 +4,7 @@ import validate_functions, assert_valid from require "lapis.validate"
 import hmac_sha1 from require "lapis.util.encoding"
 import encode_base64 from require "lapis.util.encoding"
 import cached from require "lapis.cache"
+csrf = require "lapis.csrf"
 
 Users=require "lazuli.modules.user_management.models.users"
 
@@ -18,6 +19,7 @@ class UsersApplication extends lazuli.Application
   @path: "/users"
   @name: "lazuli_modules_usermanagement_"
   @before_filter =>
+    @lazuli_modules_usermanagement_csrf_token = csrf.generate_token @
     if @session.lazuli_modules_usermanagement_currentuser and not @lazuli_modules_usermanagement_currentuser
       @lazuli_modules_usermanagement_currentuser = Users\find @session.lazuli_modules_usermanagement_currentuser
   [register: "/register"]: cached exptime: 60,[1]:=>
@@ -25,6 +27,7 @@ class UsersApplication extends lazuli.Application
   [register_do: "/register/do"]: capture_errors{
     on_error: => render: require "lazuli.modules.user_management.views.register_do", status: 403
     =>
+      csrf.assert_token @
       assert_valid @params, {
         { "username", exists: true, min_length: 2, max_length: 250, user_doesnt_exist: true }
         { "password", exists: true, min_length: 4 }
@@ -45,6 +48,7 @@ class UsersApplication extends lazuli.Application
   [login_do: "/login/do"]: capture_errors{
     on_error: => render: require "lazuli.modules.user_management.views.login_do", status: 403
     =>
+      csrf.assert_token @
       assert_valid @params, {
         { "username", exists: true, min_length: 2, max_length: 250, user_exists: true}
         { "password", exists: true, min_length: 4 }
