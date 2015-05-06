@@ -4,7 +4,7 @@ class login extends Widget
   content: =>
     h1 "Login"
     form action: @url_for("lazuli_modules_usermanagement_login_do"), method: "post", class: "pure-form pure-form-aligned", ->
-      input type: "hidden", name: "csrf_token", value: @csrf_token
+      input type: "hidden", name: "csrf_token", value: @lazuli_modules_usermanagement_csrf_token
       fieldset ->
         div class: "pure-control-group", ->
           label for: "username", "Username:"
