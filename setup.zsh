@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-export LAZULI_PATH="$(readlink -f $(dirname $0))"
+export LAZULI_PATH="$(dirname $(readlink -f $0))"
 export LAZULI_REAL_ROOT="$LAZULI_PATH/.root"
 export LAZULI_SRC="$LAZULI_PATH/.src"
 export LAZULI_ROOT="/tmp/.lazuli.$(uuidgen -t)-$(uuidgen -r)"
