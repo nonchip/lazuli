@@ -16,6 +16,7 @@ edit `config.moon` or create `custom_config.moon` (which has priority over `conf
     ./lapis server <environment>
 
 where `<environment>` may be `development`, `test` or `production`.
+the `mk` script builds any moonscript and lesscss (note: you have to install `lessc` if using lesscss) files it finds, while the `lapis` call actually runs the server
 
 ### rebuilding/upgrading your app
 
