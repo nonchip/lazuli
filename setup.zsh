@@ -83,7 +83,7 @@ case $continue_stage in
     # wrappers
     cat > $LAZULI_PATH/.run <<END
 #!/bin/zsh
-export LAZULI_PATH="\$(readlink -f \$(dirname \$0))"
+export LAZULI_PATH="\$(dirname "\$(readlink -f "\$0")")"
 export LAZULI_REAL_ROOT="\$LAZULI_PATH/.root"
 export LAZULI_ROOT="$LAZULI_ROOT"
 
