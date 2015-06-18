@@ -89,7 +89,7 @@ export LAZULI_ROOT="$LAZULI_ROOT"
 
 [ -e "\$LAZULI_ROOT" ] || ln -s "\$LAZULI_PATH/.root" \$LAZULI_ROOT
 
-export PATH="\$LAZULI_ROOT/bin:\$PATH"
+export PATH="\$LAZULI_ROOT/bin:\$LAZULI_ROOT/nginx/sbin:\$PATH"
 export LUA_PATH="./custom_?.lua;\$LAZULI_PATH/custom_?.lua;./?.lua;./?/init.lua;\$LAZULI_PATH/src/?/init.lua;\$LAZULI_PATH/src/?.lua;\$LAZULI_PATH/?.lua;\$LUA_PATH;\$LAZULI_ROOT/lualib/?.lua;\$LAZULI_ROOT/share/luajit-2.1.0-alpha/?.lua;\$LAZULI_ROOT/share/lua/5.1/?.lua;\$LAZULI_ROOT/share/lua/5.1/?/init.lua"
 export LUA_CPATH="./custom_?.so;\$LAZULI_PATH/custom_?.so;./?.so;./?/init.so;\$LAZULI_PATH/src/?/init.so;\$LAZULI_PATH/src/?.so;\$LAZULI_PATH/?.so;\$LUA_CPATH;\$LAZULI_ROOT/lualib/?.so;\$LAZULI_ROOT/share/luajit-2.1.0-alpha/?.so;\$LAZULI_ROOT/share/lua/5.1/?.so;\$LAZULI_ROOT/share/lua/5.1/?/init.so"
 export MOON_PATH="./custom_?.moon;\$LAZULI_PATH/custom_?.moon;./?.moon;./?/init.moon;\$LAZULI_PATH/src/?/init.moon;\$LAZULI_PATH/src/?.moon;\$LAZULI_PATH/?.moon;\$MOON_PATH;\$LAZULI_ROOT/lualib/?.moon;\$LAZULI_ROOT/share/luajit-2.1.0-alpha/?.moon;\$LAZULI_ROOT/share/lua/5.1/?.moon;\$LAZULI_ROOT/share/lua/5.1/?/init.moon"
