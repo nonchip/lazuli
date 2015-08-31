@@ -48,6 +48,13 @@ just press ctrl+c
 `<domain>` is the FQDN to handle and `<port>` is the port specified in `config.moon`.
 note how you can specify multiple subdomains (no wildcarding by default).
 
+the `/etc/nginx/proxy_params` included should contain at least:
+
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+
 Also, you can speed up things a tiny bit by handling the `/static/` content without proxying. just include something like this below the `location /` block:
 
     location /static/ {
