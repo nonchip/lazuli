@@ -31,7 +31,7 @@ case $continue_stage in
     git pull
     make amalg PREFIX=$LAZULI_ROOT CPATH=$LAZULI_ROOT/include LIBRARY_PATH=$LAZULI_ROOT/lib && \
     make install PREFIX=$LAZULI_ROOT || exit
-    ln -sf luajit-2.1.0-alpha $LAZULI_ROOT/bin/luajit
+    ln -sf $(find $LAZULI_ROOT/bin/ -name "luajit-2.1*" | head -n 1) $LAZULI_ROOT/bin/luajit
     ;&
   luarocks)
     echo "luarocks" > "$LAZULI_PATH/.continue_stage"
