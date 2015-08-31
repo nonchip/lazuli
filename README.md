@@ -35,16 +35,39 @@ just press ctrl+c
     ./lapis term
 
 ## webserver config
+###nginx
+
+    server{
+            server_name www.<domain> <domain>;
+            location / {
+                    proxy_pass   http://127.0.0.1:<port>/;
+                    include /etc/nginx/proxy_params;
+            }
+    }
+
+`<domain>` is the FQDN to handle and `<port>` is the port specified in `config.moon`.
+note how you can specify multiple subdomains (no wildcarding by default).
+
+Also, you can speed up things a tiny bit by handling the `/static/` content without proxying. just include something like this below the `location /` block:
+
+    location /static/ {
+      alias /PATH/TO/YOUR/LAZULI/APP/static/;
+      expires max;
+      add_header Pragma public;
+      add_header Cache-Control "no-transform,public,max-age=120,s-maxage=300";
+    }
+
+
 ###apache2
 
     <VirtualHost *:80>
-            ServerName <hostname>
+            ServerName <domain>
             ProxyPreserveHost On
             ProxyPass / http://127.0.0.1:<port>/
             ProxyPassReverse / http://127.0.0.1:<port>/
     </VirtualHost>
 
-where `<hostname>` is the FQDN to handle and `<port>` is the port specified in `config.moon`
+where `<domain>` is the FQDN to handle and `<port>` is the port specified in `config.moon`
 
 
 ## app `environment`s
