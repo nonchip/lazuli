@@ -1,4 +1,5 @@
 # lazuli - a lapis framework
+[![Stories in Ready](https://badge.waffle.io/nonchip/lazuli.svg?label=ready&title=Ready)](http://waffle.io/nonchip/lazuli)
 ## command line
 ### first time setup
 
