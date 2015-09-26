@@ -34,7 +34,7 @@ class YubiCloud
       query=@fillUrl params.yubikey, nonce
       res=http.simple query
       if res and res\find "status=OK", 1, true and res\find "nonce="..nonce, 1, true
-        idstr=params.yubikey\sub(1,-32)
+        idstr=params.yubikey\sub(1,-33)
         entry=YubiCloudModel\find idstr: idstr
         if entry
           user=entry\get_user!
