@@ -1,4 +1,6 @@
 import Widget from require "lapis.html"
+import slugify from require "lapis.util"
+
 
 class loginDo extends Widget
   content: =>
