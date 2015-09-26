@@ -28,9 +28,9 @@ class YubiCloud
 
   tryLogin: (params) =>
     nonce=@mkNonce
-    res=http.simple @fillUrl params.otp, nonce
+    res=http.simple @fillUrl params.yubikey, nonce
     if res\find "status=OK", 1, true and res\find "nonce="..nonce, 1, true
-      entry=YubiCloudModel\find idstr: params.otp\lower!\sub(-33)
+      entry=YubiCloudModel\find idstr: params.yubikey\lower!\sub(-33)
       if entry
         return entry\get_user!, res
     if @required
