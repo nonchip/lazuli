@@ -10,6 +10,7 @@ config {"development","test"}, ->
     password "<EDIT THIS>"
   session_name "<EDIT THIS>"
   secret "<EDIT THIS>"
+  port 8089
 
 config "production", ->
   postgres ->

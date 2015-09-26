@@ -5,6 +5,9 @@ import hmac_sha1 from require "lapis.util.encoding"
 import encode_base64 from require "lapis.util.encoding"
 import cached from require "lapis.cache"
 csrf = require "lapis.csrf"
+config = (require "lapis.config").get!
+
+
 
 Users=require "lazuli.modules.user_management.models.users"
 
@@ -17,11 +20,16 @@ validate_functions.user_exists = (username) ->
 
 class UsersApplication extends lazuli.Application
   @path: "/users"
-  @name: "lazuli_modules_usermanagement_"
+  @name: "modules_user_management_"
   @before_filter =>
-    @lazuli_modules_usermanagement_csrf_token = csrf.generate_token @, "lazuli_modules_usermanagement"
-    if @session.lazuli_modules_usermanagement_currentuser and not @lazuli_modules_usermanagement_currentuser
-      @lazuli_modules_usermanagement_currentuser = Users\find @session.lazuli_modules_usermanagement_currentuser
+    @modules.user_management or={}
+    @session.modules.user_management or={}
+    if not @modules.user_management.providers
+      if type(config.modules.user_management)=="table" and type(config.modules.user_management.providers)=="table"
+        @modules.user_management.providers={n,require(n)(@) for n in *config.modules.user_management.providers}
+    @modules.user_management.csrf_token = csrf.generate_token @, "lazuli_modules_usermanagement"
+    if @session.modules.user_management.currentuser and not @modules.user_management.currentuser
+      @modules.user_management.currentuser = Users\find @session.modules.user_management.currentuser
   [register: "/register"]: cached exptime: 60,[1]:=>
     render: require "lazuli.modules.user_management.views.register"
   [register_do: "/register/do"]: capture_errors{
@@ -42,8 +50,8 @@ class UsersApplication extends lazuli.Application
   [login: "/login"]: cached exptime: 60,[1]:=>
     render: require "lazuli.modules.user_management.views.login"
   [logout: "/logout"]: =>
-    @session.lazuli_modules_usermanagement_currentuser=nil
-    @lazuli_modules_usermanagement_currentuser=nil
+    @session.modules.user_management.currentuser=nil
+    @modules.user_management.currentuser=nil
     render: require "lazuli.modules.user_management.views.logout"
   [login_do: "/login/do"]: capture_errors{
     on_error: => render: require "lazuli.modules.user_management.views.login_do", status: 403
@@ -54,8 +62,24 @@ class UsersApplication extends lazuli.Application
         { "password", exists: true, min_length: 4 }
       }
       user = Users\find username: @params.username
-      assert_error user.pwHMACs1==encode_base64(hmac_sha1(@params.password,user.username..@params.password)), "wrong password"
-      @session.lazuli_modules_usermanagement_currentuser=user.id
-      @lazuli_modules_usermanagement_currentuser=user
+      logged_in_ok=false
+      user.logged_in_by_provider="fallback"
+      user.logged_in_providers_tried={}
+      for k,v in pairs @modules.user_management.providers
+        ret,msg=v\tryLogin(user,@params)
+        switch ret
+          when true
+            logged_in_ok=true
+            user.logged_in_by_provider=k
+            user.logged_in_providers_tried[k]={true,msg}
+            break
+          when false
+            user.logged_in_providers_tried[k]={false,msg}
+          when nil
+            assert_error nil, msg
+      if not logged_in_ok
+        assert_error user.pwHMACs1==encode_base64(hmac_sha1(@params.password,user.username..@params.password)), "wrong password"
+      @session.modules.user_management.currentuser=user.id
+      @modules.user_management.currentuser=user
       render: require "lazuli.modules.user_management.views.login_do"
   }

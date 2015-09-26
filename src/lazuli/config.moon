@@ -1,6 +1,5 @@
 lapisconfig=require "lapis.config"
 import config from lapisconfig
-import slugify from require "lapis.util"
 
 config "development", ->
   set "envmode","development"
@@ -12,6 +11,7 @@ config {"development","test","production"},->
   set "env_lua_path", (os.getenv "LUA_PATH")\gsub "%;", "\\;"
   set "env_lua_cpath", (os.getenv "LUA_CPATH")\gsub "%;", "\\;"
   set "env_moon_path", (os.getenv "MOON_PATH")\gsub "%;", "\\;"
+  modules {}
   postgres ->
     backend "pgmoon"
 
