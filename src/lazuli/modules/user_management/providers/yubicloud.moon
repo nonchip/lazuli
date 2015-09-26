@@ -2,6 +2,10 @@ import escape from require "lapis.util"
 http = require "lapis.nginx.http"
 import render_html from require "lapis.html"
 
+UsersModel=require "lazuli.modules.user_management.models.users"
+YubiCloudModel=require "lazuli.modules.user_management.models.yubicloud"
+
+
 frandom = nil
 ranval=->
   frandom or= assert io.open "/dev/urandom", "rb"
@@ -26,12 +30,13 @@ class YubiCloud
     nonce=@mkNonce
     res=http.simple @fillUrl params.otp, nonce
     if res\find "status=OK", 1, true and res\find "nonce="..nonce, 1, true
-      return true, res
+      entry=YubiCloudModel\find idstr: params.otp\lower!\sub(-33)
+      if entry
+        return entry\get_user!, res
+    if @required
+      return nil, res
     else
-      if @required
-        return nil, res
-      else
-        return false, res
+      return false, res
 
   mkNonce: =>
     now=os.time!
