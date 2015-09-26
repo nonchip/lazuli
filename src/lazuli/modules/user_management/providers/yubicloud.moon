@@ -34,7 +34,7 @@ class YubiCloud
       nonce=@mkNonce!
       query=@fillUrl params.yubikey, nonce
       res=http.simple query
-      if res\find "status=OK", 1, true and res\find "nonce="..nonce, 1, true
+      if res and res\find "status=OK", 1, true and res\find "nonce="..nonce, 1, true
         entry=YubiCloudModel\find idstr: params.yubikey\lower!\sub(-33)
         if entry
           user=entry\get_user!
@@ -51,7 +51,9 @@ class YubiCloud
     now=os.time!
     hash=now..encode_base64 hmac_sha1 now..ranval!,ranval!..now
     hash=hash\gsub "%/","_"
-    hash\sub 1,20
+    hash=hash\gsub "%%","_"
+    hash=hash\sub 1,20
+    hash\lower!
 
   getLoginOkHtml:    => ""
   getLoginErrorHtml: => ""
