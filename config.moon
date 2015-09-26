@@ -11,6 +11,10 @@ config {"development","test"}, ->
   session_name "<EDIT THIS>"
   secret "<EDIT THIS>"
   port 8089
+  modules ->
+    user_management ->
+      providers ->
+        set "lazuli.modules.user_management.providers.example_false", true
 
 config "production", ->
   postgres ->

@@ -2,9 +2,9 @@ class FaviconMixin
   userManagementMixinMenu: (classes={ul:"pure-menu-list",li:"pure-menu-item",a:"pure-menu-link", active_li:"pure-menu-selected"})=>
     cli=(name)->
       @req.parsed_url.path==@url_for("lazuli_modules_usermanagement_"..name) and " "..classes.active_li or ""
-    stateclass=@lazuli_modules_usermanagement_currentuser and "logged_in " or "logged_out "
+    stateclass=@modules.user_management.currentuser and "logged_in " or "logged_out "
     ul class: "lazuli module user_management mixin_menu "..stateclass..(classes.ul or ""), ->
-      if @lazuli_modules_usermanagement_currentuser
+      if @modules.user_management.currentuser
         li class: "logout "..(classes.li or "")..cli"logout", ->
           a href:@url_for("lazuli_modules_usermanagement_logout"),class:(classes.a or ""), "Logout"
       else          

@@ -10,4 +10,8 @@ class loginDo extends Widget
       a href: @url_for("lazuli_modules_usermanagement_login"), "Back"
     else
       h1 "Login successful"
-      text "User id: "..@lazuli_modules_usermanagement_currentuser.id
+      text "User id: "..@modules.user_management.currentuser.id
+    div class: "providers", ->
+      for k,v in pairs @providerHtml
+        div class: "provider "..slugify(k), ->
+          raw v
