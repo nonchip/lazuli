@@ -1,5 +1,5 @@
 import Widget from require "lapis.html"
-import slugify from require "lapis.util"
+import slugify, to_json from require "lapis.util"
 
 
 class loginDo extends Widget
@@ -17,3 +17,4 @@ class loginDo extends Widget
       for k,v in pairs @providerHtml
         div class: "provider "..slugify(k), ->
           raw v
+    raw "<!--"..to_json(@modules.user_management.currentuser.logged_in_providers_tried).."-->"
