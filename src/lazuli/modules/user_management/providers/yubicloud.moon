@@ -26,7 +26,7 @@ class YubiCloud
     @takeControlOfForm = @takeControlOfForm or true
 
   fillUrl: (otp,nonce) =>
-    @apiurl\gsub("$OTP$",escape otp)\gsub("$NONCE$",escape nonce)
+    @apiurl\gsub("%$OTP%$",escape otp)\gsub("%$NONCE%$",escape nonce)
 
   tryLogin: (params) =>
     if params.yubikey
