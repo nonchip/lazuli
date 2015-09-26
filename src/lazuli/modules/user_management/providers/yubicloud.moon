@@ -1,0 +1,63 @@
+import escape from require "lapis.util"
+http = require "lapis.nginx.http"
+import render_html from require "lapis.html"
+
+frandom = nil
+ranval=->
+  frandom or= assert io.open "/dev/urandom", "rb"
+  s = frandom\read 4
+  assert s\len! == 4
+  v = 0
+  for i = 1, 4
+    v = 256 * v + s\byte i
+  return v
+
+
+class YubiCloud
+  new: (@app,@modulename,@config) =>
+    @apiurl = @config.apiurl or "http://api.yubico.com/wsapi/2.0/verify?id=1&otp=$OTP$&nonce=$NONCE$&timestamp=1"
+    @required = @config.required or false
+    @takeControlOfForm = @takeControlOfForm or true
+
+  fillUrl: (otp,nonce) =>
+    @apiurl\gsub("$OTP$",escape otp)\gsub("$NONCE$",escape nonce)
+
+  tryLogin: (user,params) =>
+    nonce=@mkNonce
+    res=http.simple @fillUrl params.otp, nonce
+    if res\find "status=OK", 1, true and res\find "nonce="..nonce, 1, true
+      return true, res
+    else
+      if @required
+        return nil, res
+      else
+        return false, res
+
+  mkNonce: =>
+    now=os.time!
+    hash=now..encode_base64 hmac_sha1 now..ranval!,ranval!..now
+    hash=hash\gsub "%/","_"
+    hash\sub 1,20
+
+  getLoginOkHtml:    => ""
+  getLoginErrorHtml: => ""
+
+  getLoginHtml: =>
+    render_html ->
+      div class: "pure-control-group yubigroup", ->
+        label for: "yubikey", "YubiCloud:"
+        input id: "yubikey", type: "yubikey", name: "yubikey", autocomplete: "off", placeholder: "YubiKey OTP", autofocus: @takeControlOfForm and "autofocus" or nil
+        if @takeControlOfForm
+          input type: "button", value: "X", id: "closeYubiKeyBtn"
+      if @takeControlOfForm
+        script ->
+          raw [[
+            document.getElementsByClassName("usernamegroup")[0].hidden=true
+            document.getElementsByClassName("passwordgroup")[0].hidden=true
+            document.getElementById("closeYubiKeyBtn").onclick=function(){
+              document.getElementsByClassName("usernamegroup")[0].hidden=false
+              document.getElementsByClassName("passwordgroup")[0].hidden=false
+              document.getElementsByClassName("yubigroup")[0].hidden=true
+              document.getElementById("username").focus()
+            }
+          ]]
