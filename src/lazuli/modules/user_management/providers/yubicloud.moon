@@ -1,6 +1,8 @@
 import escape from require "lapis.util"
 http = require "lapis.nginx.http"
 import render_html from require "lapis.html"
+import from_json,to_json from require "lapis.util"
+import encode_base64,hmac_sha1 from require "lapis.util.encoding"
 
 UsersModel=require "lazuli.modules.user_management.models.users"
 YubiCloudModel=require "lazuli.modules.user_management.models.yubicloud"
