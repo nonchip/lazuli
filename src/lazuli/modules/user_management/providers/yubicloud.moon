@@ -1,7 +1,6 @@
-import escape from require "lapis.util"
 http = require "lapis.nginx.http"
 import render_html from require "lapis.html"
-import from_json,to_json from require "lapis.util"
+import from_json,to_json,slugify, escape from require "lapis.util"
 import encode_base64,hmac_sha1 from require "lapis.util.encoding"
 
 UsersModel=require "lazuli.modules.user_management.models.users"
@@ -35,7 +34,7 @@ class YubiCloud
       query=@fillUrl params.yubikey, nonce
       res=http.simple query
       if res and res\find "status=OK", 1, true and res\find "nonce="..nonce, 1, true
-        entry=YubiCloudModel\find idstr: params.yubikey\lower!\sub(-33)
+        entry=YubiCloudModel\find idstr: params.yubikey\lower!\sub(-32)
         if entry
           user=entry\get_user!
           if user
@@ -49,9 +48,7 @@ class YubiCloud
 
   mkNonce: =>
     now=os.time!
-    hash=now..encode_base64 hmac_sha1 now..ranval!,ranval!..now
-    hash=hash\gsub "%/","_"
-    hash=hash\gsub "%%","_"
+    hash=slugify now..encode_base64 hmac_sha1 now..ranval!,ranval!..now
     hash=hash\sub 1,20
     hash\lower!
 
