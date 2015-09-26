@@ -36,6 +36,7 @@ class YubiCloud
         entry=YubiCloudModel\find idstr: params.yubikey\lower!\sub(-33)
         if entry
           return entry\get_user!, res
+      return nil, "invalid OTP or unregistered"
     if @required
       return nil, res
     else
