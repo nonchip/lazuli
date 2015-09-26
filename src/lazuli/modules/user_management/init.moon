@@ -62,19 +62,19 @@ class UsersApplication extends lazuli.Application
     =>
       csrf.assert_token @, "lazuli_modules_usermanagement"
       user=nil
-      logged_in_by_provider="fallback"
-      logged_in_providers_tried={}
+      @logged_in_by_provider="fallback"
+      @logged_in_providers_tried={}
       for k,v in pairs @modules.user_management.providers
         ret,msg=v\tryLogin(@params)
         switch ret
           when false
-            logged_in_providers_tried[k]={false,msg}
+            @logged_in_providers_tried[k]={false,msg}
           when nil
             assert_error nil, msg
           else
             user=ret
-            logged_in_by_provider=k
-            logged_in_providers_tried[k]={true,msg}
+            @logged_in_by_provider=k
+            @logged_in_providers_tried[k]={true,msg}
             break
       if not user
         assert_valid @params, {
@@ -83,8 +83,8 @@ class UsersApplication extends lazuli.Application
         }
         user = Users\find username: @params.username
         assert_error user.pwHMACs1==encode_base64(hmac_sha1(@params.password,user.username..@params.password)), "wrong password"
-      user.logged_in_providers_tried=logged_in_providers_tried
-      user.logged_in_by_provider=logged_in_by_provider
+      user.logged_in_providers_tried=@logged_in_providers_tried
+      user.logged_in_by_provider=@logged_in_by_provider
       @session.modules.user_management.currentuser=user.id
       @modules.user_management.currentuser=user
       @providerHtml={k,v\getLoginOkHtml! for k,v in pairs @modules.user_management.providers}
