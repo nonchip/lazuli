@@ -27,7 +27,7 @@ class YubiCloud
     @apiurl\gsub("$OTP$",escape otp)\gsub("$NONCE$",escape nonce)
 
   tryLogin: (params) =>
-    nonce=@mkNonce
+    nonce=@mkNonce!
     res=http.simple @fillUrl params.yubikey, nonce
     if res\find "status=OK", 1, true and res\find "nonce="..nonce, 1, true
       entry=YubiCloudModel\find idstr: params.yubikey\lower!\sub(-33)
