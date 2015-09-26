@@ -31,12 +31,13 @@ class YubiCloud
   tryLogin: (params) =>
     if params.yubikey
       nonce=@mkNonce!
-      res=http.simple @fillUrl params.yubikey, nonce
+      query=@fillUrl params.yubikey, nonce
+      res=http.simple query
       if res\find "status=OK", 1, true and res\find "nonce="..nonce, 1, true
         entry=YubiCloudModel\find idstr: params.yubikey\lower!\sub(-33)
         if entry
           return entry\get_user!, res
-      return nil, "invalid OTP or unregistered, details:<br>"..res
+      return nil, "invalid OTP or unregistered, details: "..query.." => "..res
     if @required
       return nil, res
     else
