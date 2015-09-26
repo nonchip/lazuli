@@ -34,13 +34,14 @@ class YubiCloud
       query=@fillUrl params.yubikey, nonce
       res=http.simple query
       if res and res\find "status=OK", 1, true and res\find "nonce="..nonce, 1, true
-        entry=YubiCloudModel\find idstr: params.yubikey\sub(-32)
+        idstr=params.yubikey\sub(1,-32)
+        entry=YubiCloudModel\find idstr: idstr
         if entry
           user=entry\get_user!
           if user
             return user, res
           return nil, "OTP -> user resulution failed."
-        return nil, "OTP unknown. idstr: "..params.yubikey\sub(-32)
+        return nil, "OTP unknown. idstr: "..idstr
       return nil, "invalid OTP, details: "..query.." => "..res
     if @required
       return nil, res
