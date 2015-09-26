@@ -28,7 +28,7 @@ class YubiCloud
     @apiurl\gsub("%$OTP%$",escape otp)\gsub("%$NONCE%$",escape nonce)
 
   tryLogin: (params) =>
-    if params.yubikey
+    if params.yubikey and type(params.yubikey)=="string" and params.yubikey\len! >0
       params.yubikey=params.yubikey\lower!
       nonce=@mkNonce!
       query=@fillUrl params.yubikey, nonce
@@ -44,8 +44,8 @@ class YubiCloud
         return nil, "OTP unknown. idstr: "..idstr
       return nil, "invalid OTP, details: "..query.." => "..res
     if @required
-      return nil, res
-    return false, res
+      return nil, "YubiKey OTP required."
+    return false,"no OTP, skipping."
 
   mkNonce: =>
     now=os.time!
