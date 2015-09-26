@@ -1,8 +1,6 @@
 # lazuli - a lapis framework
-[![Stories in Backlog](https://badge.waffle.io/nonchip/lazuli.svg?label=backlog&title=Backlog)](http://waffle.io/nonchip/lazuli)
 [![Stories in Ready](https://badge.waffle.io/nonchip/lazuli.svg?label=ready&title=Ready)](http://waffle.io/nonchip/lazuli)
 [![Stories in Progress](https://badge.waffle.io/nonchip/lazuli.svg?label=in progress&title=In Progress)](http://waffle.io/nonchip/lazuli)
-[![Stories in Done](https://badge.waffle.io/nonchip/lazuli.svg?label=done&title=Done)](http://waffle.io/nonchip/lazuli)
 ## command line
 ### first time setup
 
