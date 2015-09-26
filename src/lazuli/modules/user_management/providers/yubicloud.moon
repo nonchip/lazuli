@@ -22,7 +22,7 @@ class YubiCloud
   fillUrl: (otp,nonce) =>
     @apiurl\gsub("$OTP$",escape otp)\gsub("$NONCE$",escape nonce)
 
-  tryLogin: (user,params) =>
+  tryLogin: (params) =>
     nonce=@mkNonce
     res=http.simple @fillUrl params.otp, nonce
     if res\find "status=OK", 1, true and res\find "nonce="..nonce, 1, true
