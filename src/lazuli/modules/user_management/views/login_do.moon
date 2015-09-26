@@ -13,8 +13,8 @@ class loginDo extends Widget
     else
       h1 "Login successful"
       text "User id: "..@modules.user_management.currentuser.id
+      raw "<!--"..to_json(@modules.user_management.currentuser.logged_in_providers_tried).."-->"
     div class: "providers", ->
       for k,v in pairs @providerHtml
         div class: "provider "..slugify(k), ->
           raw v
-    raw "<!--"..to_json(@modules.user_management.currentuser.logged_in_providers_tried).."-->"
