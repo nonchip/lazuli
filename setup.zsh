@@ -22,22 +22,24 @@ case $continue_stage in
     ln -s "$LAZULI_REAL_ROOT" "$LAZULI_ROOT"
     echo "$LAZULI_ROOT" > "$LAZULI_PATH/.continue_root"
     ;&
-  luajit)
+  luajit) v=52ea1a30afc204553c99126ab43c2b16f2bd0182
     echo "luajit" > "$LAZULI_PATH/.continue_stage"
     cd $LAZULI_SRC
     git clone http://luajit.org/git/luajit-2.0.git luajit || exit
     cd luajit
-    git checkout v2.1
+    git checkout ${v}
     git pull
     make amalg PREFIX=$LAZULI_ROOT CPATH=$LAZULI_ROOT/include LIBRARY_PATH=$LAZULI_ROOT/lib && \
     make install PREFIX=$LAZULI_ROOT || exit
     ln -sf $(find $LAZULI_ROOT/bin/ -name "luajit-2.1*" | head -n 1) $LAZULI_ROOT/bin/luajit
     ;&
-  luarocks)
+  luarocks) v=e3203adbc3f5daa5f46097d3439edbada01807f3
     echo "luarocks" > "$LAZULI_PATH/.continue_stage"
     cd $LAZULI_SRC
     git clone git://github.com/keplerproject/luarocks.git || exit
     cd luarocks
+    git checkout ${v}
+    git pull
     ./configure --prefix=$LAZULI_ROOT \
                 --lua-version=5.1 \
                 --lua-suffix=jit \
