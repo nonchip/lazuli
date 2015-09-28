@@ -22,7 +22,7 @@ class YubiCloud
   new: (@app,@modulename,@config) =>
     @apiurl = @config.apiurl or "http://api.yubico.com/wsapi/2.0/verify?id=1&otp=$OTP$&nonce=$NONCE$&timestamp=1"
     @required = @config.required or false
-    @takeControlOfForm = @takeControlOfForm or true
+    @takeControlOfForm = @config.takeControlOfForm or true
 
   fillUrl: (otp,nonce) =>
     @apiurl\gsub("%$OTP%$",escape otp)\gsub("%$NONCE%$",escape nonce)
