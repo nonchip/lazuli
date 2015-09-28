@@ -51,12 +51,12 @@ case $continue_stage in
     echo "moonscript" > "$LAZULI_PATH/.continue_stage"
     $LAZULI_ROOT/bin/luarocks install moonscript
     ;&
-  openresty)
+  openresty) v=1.9.3.1
     echo "openresty" > "$LAZULI_PATH/.continue_stage"
     cd $LAZULI_SRC
-    wget http://openresty.org/download/ngx_openresty-1.7.10.1.tar.gz -O ngx_openresty-1.7.10.1.tar.gz
-    tar xzvf ngx_openresty-1.7.10.1.tar.gz
-    cd ngx_openresty-1.7.10.1
+    wget http://openresty.org/download/ngx_openresty-${v}.tar.gz -O ngx_openresty-${v}.tar.gz
+    tar xzvf ngx_openresty-${v}.tar.gz
+    cd ngx_openresty-${v}
     ./configure --prefix=$LAZULI_ROOT --with-luajit=$LAZULI_ROOT --with-pcre-jit --with-ipv6 && \
     make && \
     make install || exit
