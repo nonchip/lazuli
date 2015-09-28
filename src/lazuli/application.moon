@@ -15,7 +15,7 @@ class extends lapis.Application
         print to_json ngx.ctx.performance
     @modules or=modules
     @session.modules or={}
-  "/_lazuli/console": if config.enable_console 
+  "/_lazuli/console": if config.enable_console
     (require "lapis.console").make!
   else
     => "console disabled in config"
@@ -28,3 +28,9 @@ class extends lapis.Application
   new: (...)=>
     @modules=modules
     super ...
+  enable: (feature,forcelapis=false)=>
+    if not forcelapis
+      have,fn=pcall require, "lazuli.modules."..feature..".enabler"
+      if have and type(fn)=="function"
+        return fn @
+    super feature
