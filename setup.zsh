@@ -47,11 +47,6 @@ case $continue_stage in
                 --force-config && \
     make build && make install || exit
     ;&
-  msgpack)
-    echo "msgpack" > "$LAZULI_PATH/.continue_stage"
-    # messagepack
-    $LAZULI_ROOT/bin/luarocks install lua-messagepack || exit
-    ;&
   moonscript)
     echo "moonscript" > "$LAZULI_PATH/.continue_stage"
     $LAZULI_ROOT/bin/luarocks install moonscript
@@ -73,10 +68,6 @@ case $continue_stage in
   lapisconsole)
     echo "lapisconsole" > "$LAZULI_PATH/.continue_stage"
     $LAZULI_ROOT/bin/luarocks install --server=http://rocks.moonscript.org lapis-console
-    ;&
-  sitegen)
-    echo "sitegen" > "$LAZULI_PATH/.continue_stage"
-    $LAZULI_ROOT/bin/luarocks install https://raw.github.com/leafo/sitegen/master/sitegen-dev-1.rockspec
     ;&
   wrappers)
     echo "wrappers" > "$LAZULI_PATH/.continue_stage"
@@ -106,7 +97,6 @@ END
     ln -sf .run $LAZULI_PATH/lapis
     ln -sf .run $LAZULI_PATH/moonc
     ln -sf .run $LAZULI_PATH/luarocks
-    ln -sf .run $LAZULI_PATH/sitegen
     ;&
 esac
 
