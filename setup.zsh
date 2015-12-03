@@ -22,7 +22,7 @@ case $continue_stage in
     ln -s "$LAZULI_REAL_ROOT" "$LAZULI_ROOT"
     echo "$LAZULI_ROOT" > "$LAZULI_PATH/.continue_root"
     ;&
-  luajit) v=52ea1a30afc204553c99126ab43c2b16f2bd0182
+  luajit) v=126e55d416ad10dc9265593b73b9f322dbf9d658
     echo "luajit" > "$LAZULI_PATH/.continue_stage"
     cd $LAZULI_SRC
     git clone http://luajit.org/git/luajit-2.0.git luajit || exit
@@ -53,7 +53,7 @@ case $continue_stage in
     echo "moonscript" > "$LAZULI_PATH/.continue_stage"
     $LAZULI_ROOT/bin/luarocks install moonscript
     ;&
-  openresty) v=1.9.3.1
+  openresty) v=1.9.3.2
     echo "openresty" > "$LAZULI_PATH/.continue_stage"
     cd $LAZULI_SRC
     wget http://openresty.org/download/ngx_openresty-${v}.tar.gz -O ngx_openresty-${v}.tar.gz
