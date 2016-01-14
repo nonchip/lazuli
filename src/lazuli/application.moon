@@ -5,15 +5,12 @@ import to_json from require "lapis.util"
 migrations=require "lapis.db.migrations"
 config = (require "lapis.config").get!
 
-modules={}
-
-
 class extends lapis.Application
   @before_filter =>
     if config.measure_performance
       after_dispatch ->
         print to_json ngx.ctx.performance
-    @modules or=modules
+    @modules or={}
     @session.modules or={}
   "/_lazuli/console": if config.enable_console
     (require "lapis.console").make!
@@ -26,7 +23,7 @@ class extends lapis.Application
   else
     => "web migration disabled in config"
   new: (...)=>
-    @modules=modules
+    @modules or={}
     super ...
   enable: (feature,forcelapis=false)=>
     if not forcelapis
