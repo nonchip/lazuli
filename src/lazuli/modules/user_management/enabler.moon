@@ -1,6 +1,7 @@
 =>
   @include "lazuli.modules.user_management"
   @before_filter =>
+    @modules or={}
     @modules.user_management or={}
     @session.modules.user_management or={}
     if not @modules.user_management.providers
