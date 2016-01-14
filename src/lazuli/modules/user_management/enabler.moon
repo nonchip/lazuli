@@ -1,3 +1,5 @@
+Users=require "lazuli.modules.user_management.models.users"
+
 =>
   @include "lazuli.modules.user_management"
   @before_filter =>
