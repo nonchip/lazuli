@@ -1,8 +1,10 @@
 Users=require "lazuli.modules.user_management.models.users"
-import p from require "moon"
+import dump from require "moonscript.util"
 
 =>
-  p @
+  f=io.open "/tmp/a","w"
+  f\write dump @
+  f\close!
   --@modules or={}
   @@include "lazuli.modules.user_management" if not @modules.user_management
   @modules.user_management or={}
