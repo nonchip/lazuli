@@ -1,7 +1,7 @@
 Users=require "lazuli.modules.user_management.models.users"
 
 =>
-  @modules or={}
+  --@modules or={}
   @include "lazuli.modules.user_management" if not @modules.user_management
   @modules.user_management or={}
   @before_filter =>
