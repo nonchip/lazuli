@@ -35,6 +35,8 @@ class extends lapis.Application
     App=@__parent
     cache=nil
     name=next r
+    cont=r[1]
+    r[1]=nil
     @__base[r]= =>
       if not cache
         for app_route in pairs App.__base
@@ -43,7 +45,7 @@ class extends lapis.Application
             if app_route_name == name
               cache=App.__base[app_route]
               break
-      if r[1]
-        r[1] @, cache(@)
+      if cont
+        cont @, cache(@)
       else
         cache(@)
