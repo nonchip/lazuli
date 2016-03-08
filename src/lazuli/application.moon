@@ -42,7 +42,8 @@ class extends lapis.Application
             app_route_name = next app_route
             if app_route_name == name
               cache=App.__base[app_route]
+              break
       if r[1]
-        r[1] @, App.__base[app_route](@)
+        r[1] @, cache(@)
       else
-        App.__base[app_route](@)
+        cache(@)
