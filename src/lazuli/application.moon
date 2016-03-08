@@ -31,14 +31,18 @@ class extends lapis.Application
       if have and type(fn)=="function"
         return fn @
     super feature
-  superroute: (sub)=>
+  superroute: (r)=>
     App=@__parent
-    for app_route in pairs App.__base
-      if type(app_route) == "table"
-        app_route_name = next app_route
-        if app_route_name == @route_name
-          return =>
-            if sub
-              sub @, App.__base[app_route](@)
-            else
-              App.__base[app_route](@)
+    cache=nil
+    name=next r
+    return =>
+      if not cache
+        for app_route in pairs App.__base
+          if type(app_route) == "table"
+            app_route_name = next app_route
+            if app_route_name == name
+              cache=App.__base[app_route]
+      if r[1]
+        r[1] @, App.__base[app_route](@)
+      else
+        App.__base[app_route](@)
