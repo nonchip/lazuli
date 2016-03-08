@@ -38,4 +38,7 @@ class extends lapis.Application
         app_route_name = next app_route
         if app_route_name == @route_name
           return =>
-            sub @, App.__base[app_route](@)
+            if sub
+              sub @, App.__base[app_route](@)
+            else
+              App.__base[app_route](@)
