@@ -35,7 +35,7 @@ class extends lapis.Application
     App=@__parent
     cache=nil
     name=next r
-    return =>
+    return [r]: =>
       if not cache
         for app_route in pairs App.__base
           if type(app_route) == "table"
