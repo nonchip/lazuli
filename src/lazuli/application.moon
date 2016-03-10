@@ -31,11 +31,11 @@ class extends lapis.Application
       if have and type(fn)=="function"
         return fn @
     super feature
-  superroute: (r)=>
+  superroute: (r,f)=>
     App=@__parent
     cache=nil
     name=next r
-    cont=r[1]
+    cont=f or r[1]
     r[1]=nil
     @__base[r]= =>
       if not cache
