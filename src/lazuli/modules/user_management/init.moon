@@ -46,6 +46,8 @@ class UsersApplication extends lazuli.Application
         username: @params.username
         pwHMACs1: encode_base64(hmac_sha1(@params.password,@params.username..@params.password))
       }
+      @session.modules.user_management.currentuser=user.id
+      @modules.user_management.currentuser=user
       render: require "lazuli.modules.user_management.views.register_do"
   }
   [login: "/login"]: =>
