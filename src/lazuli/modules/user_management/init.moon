@@ -18,6 +18,10 @@ validate_functions.user_exists = (username) ->
   return u and true or false, "user does not exist"
 
 class UsersApplication extends lazuli.Application
+  @hash_password: (username,password)=>
+    encode_base64 hmac_sha1 password..config.secret, username..password
+  @verify_password: (username,password,hash)=>
+    hash == @hash_password username, password
   @path: "/users"
   @name: "lazuli_modules_usermanagement_"
   @before_filter =>
@@ -44,7 +48,7 @@ class UsersApplication extends lazuli.Application
       }
       user = Users\create {
         username: @params.username
-        pwHMACs1: encode_base64(hmac_sha1(@params.password,@params.username..@params.password))
+        pwHash: @@hash_password @params.username, @params.password
       }
       render: require "lazuli.modules.user_management.views.register_do"
   }
@@ -82,7 +86,7 @@ class UsersApplication extends lazuli.Application
           { "password", exists: true, min_length: 4 }
         }
         user = Users\find username: @params.username
-        assert_error user.pwHMACs1==encode_base64(hmac_sha1(@params.password,user.username..@params.password)), "wrong password"
+        assert_error @@verify_password(@params.username, @params.password, user.pwHash), "wrong password"
       user.logged_in_providers_tried=@logged_in_providers_tried
       user.logged_in_by_provider=@logged_in_by_provider
       @session.modules.user_management.currentuser=user.id
