@@ -50,6 +50,8 @@ class UsersApplication extends lazuli.Application
         username: @params.username
         pwHash: @@hash_password @params.username, @params.password
       }
+      @session.modules.user_management.currentuser=user.id
+      @modules.user_management.currentuser=user
       render: require "lazuli.modules.user_management.views.register_do"
   }
   [login: "/login"]: =>
