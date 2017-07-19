@@ -1,6 +1,12 @@
-# lazuli - a lapis framework
-[![Stories in Ready](https://badge.waffle.io/nonchip/lazuli.svg?label=ready&title=Ready)](http://waffle.io/nonchip/lazuli)
-[![Stories in Progress](https://badge.waffle.io/nonchip/lazuli.svg?label=in progress&title=In Progress)](http://waffle.io/nonchip/lazuli)
+# THIS PROJECT IS DEPRECATED
+**I will not continue any work on lazuli, as its dependency lapis has unfixable design and developer based issues that keep me from continuing to use it.**
+
+**please refer to https://github.com/cuddlyrobot/dysnomia for a better openresty+moonscript based web framework.**
+
+**or just feel free to fork this according to the included LICENSE.**
+
+more or less useful instructions below:
+
 ## command line
 ### first time setup
 
